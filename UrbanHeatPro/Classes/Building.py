@@ -169,7 +169,8 @@ class Building():
 		self.space_heating_power	     = self.my_space_heating_demand.sh_power
 		self.solar_gains		     = self.my_space_heating_demand.solar_gains
 		self.internal_gains	 	     = self.my_space_heating_demand.internal_gains
-		
+		# self.peak_space_heating = np.max(self.my_space_heating_demand.sh_power)
+
 		# Building temperature [degC]
 		self.Tb	 			     = self.my_space_heating_demand.Tb
 		
@@ -188,9 +189,9 @@ class Building():
 		self.space_heating_energy_per_area   = (self.space_heating_energy / self.building.heated_area)
 		self.solar_gains_per_area 	     = (self.solar_gains_energy / self.building.heated_area)
 		self.internal_gains_per_area 	     = (self.internal_gains_energy / self.building.heated_area)
-		
+
 		result = [self.space_heating_energy, self.solar_gains_energy, self.internal_gains_energy,
-				  self.space_heating_energy_per_area, self.solar_gains_per_area, self.internal_gains_per_area]
+				  self.space_heating_energy_per_area, self.solar_gains_per_area, self.internal_gains_per_area,]
   
 		result = np.resize(result, (1, len(result)))[0]
 			
@@ -260,7 +261,8 @@ class Building():
 					
 				# Power [W] 
 				self.hot_water_power	 = self.my_hot_water_demand.dhw_power
-			
+				# self.peak_hot_water = np.max(self.my_hot_water_demand.dhw_power)
+
 				# Flow rate [m3]
 				self.hot_water_m3		 = self.my_hot_water_demand.dhw_m3
 				self.hot_water_tank_m3	 = self.my_hot_water_demand.dhw_tank_m3
@@ -309,13 +311,15 @@ class Building():
 			if not self._energy_only:
 				self.total_power  += self.hot_water_power
 			self.total_energy += self.dhw_energy
-		
+
+		self.peak_power = np.max(self.total_power)
+
 		# Delayed time series
 		if not self._energy_only:
 			if self.building.dist_to_heat_source > 0.:
 				self.calculate_delayed_timeseries()
 			
-		return np.array([self.total_energy, self.total_energy / self.building.heated_area])
+		return np.array([self.total_energy, self.total_energy / self.building.heated_area, self.peak_power])
 #
 	def calculate_delayed_timeseries(self, flow_vel = 1.):
 		"""

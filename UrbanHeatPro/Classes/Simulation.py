@@ -647,7 +647,7 @@ class Simulation():
 		"""
 		
 		filename  = '{}/input/Regional Data/{}/I_{}.csv'.format(self.my_dir, self.region, self.region) 
-		self.I = self.read_data_from_csv(filename, usecols = range(0, 4))		
+		self.I = self.read_data_from_csv(filename, usecols = range(0, 4))
 #
 	def filter_weather_data(self):
 		"""

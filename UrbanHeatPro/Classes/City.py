@@ -33,7 +33,7 @@ class City():
 		self.processes			  = SIMULATION[3][0]		# Number of parallel processes
 		self.chunk_size			  = SIMULATION[3][1]		# Number of buildings in chunk to save
 		self.b_to_save_syncity	  = np.zeros([self.chunk_size, 30])
-		self.b_to_save_heat    	  = np.zeros([self.chunk_size, 40])
+		self.b_to_save_heat    	  = np.zeros([self.chunk_size, 41])
 		self.counter_syncity	  = 0
 		self.counter_heat		  = 0
 		
@@ -259,7 +259,7 @@ class City():
 					sys.stdout.flush()
 			
 			except Exception as e:
-				#print('>>> Error: {}'.format(e))
+				print(e)
 				break
 #
 	def call_update_synthetic_building(self, feederQueue, writerQueue):
@@ -512,7 +512,8 @@ class City():
 									energy_hw    		= 0.,
 									power_total  		= np.zeros([self.nts]),
 									power_total_delayed = np.zeros([self.nts]),
-									energy_total 		= 0.)
+									energy_total 		= 0.,
+									)
 		
 		# Queues
 		if (self.debug >= 1):
@@ -583,9 +584,9 @@ class City():
 					sys.stdout.flush()
 			
 			except Exception as e:
-				#print('>>> Error: {}'.format(e))
+				print('\n Building id.:' + str(building.bid) + '\n Error msg:\n' + e)
 				break
-#
+
 	def calculate_building_heat_demand(self, building):
 		"""
 		
@@ -602,7 +603,7 @@ class City():
 		# initialize results
 		sh = np.zeros(6)
 		hw = np.zeros(2)
-		total = np.zeros(2)
+		total = np.zeros(3)
 		
 		# check if building is connected to the network
 		rand_num = np.random.uniform(0, 1, 1)[0]
@@ -633,7 +634,9 @@ class City():
 					self.results['power_hw']  += my_building.hot_water_power
 				#self.dhw_energy += my_building.dhw_energy
 				self.results['energy_hw'] += my_building.dhw_energy
-				
+			
+			# if self._hot_water & self._space_heating:
+			# 	peak = np.array([np.max(my_building.space_heating_power + my_building.hot_water_power)])
 			
 			## Total heat demand
 			total = my_building.calculate_total_heat_demand()
@@ -653,7 +656,7 @@ class City():
 			
 			## save results per timestep
 			if (self.save == 3):
-				if hot_water:
+				if self._hot_water:
 					my_building.save_dhw_debug_csv()
 			
 			# Plot
@@ -738,13 +741,13 @@ class City():
 							'%.2f', '%.2f', '%.2f',
 							'%.2f', '%.2f', '%.2f',
 							'%.2f', '%.2f',
-							'%.2f', '%.2f']
+							'%.2f', '%.2f', '%.2f']
 					np.savetxt(f, self.b_to_save_heat, delimiter = ';', fmt = fmt)				
 					f.close()
 					
 					# restart counter
 					self.counter_heat = 0
-					self.b_to_save_heat    	  = np.zeros([self.chunk_size, 40])
+					self.b_to_save_heat    	  = np.zeros([self.chunk_size, 41])
 					
 					# Progress bar
 					#print('      bid: {}'.format(result[0][0]))
@@ -771,7 +774,7 @@ class City():
 							'%.2f', '%.2f', '%.2f',
 							'%.2f', '%.2f', '%.2f',
 							'%.2f', '%.2f',
-							'%.2f', '%.2f']
+							'%.2f', '%.2f', '%.2f']
 				
 				# drop zero rows
 				self.b_to_save_heat = self.b_to_save_heat[~np.all(self.b_to_save_heat == 0, axis = 1)]
@@ -1050,7 +1053,8 @@ class City():
 				'sh_demand;solar_gains;int_gains;' + \
 				'sh_demand_per_h_area;solar_gains_per_h_area;int_gains_per_h_area;' + \
 				'hw_demand;hw_demand_m3;' + \
-				'total_demand;total_demand_per_h_area\n')
+				'total_demand;total_demand_per_h_area' + \
+				'peak_demand_building_W;peak_demand_city_W\n')
 							
 		f.close()		
 #
