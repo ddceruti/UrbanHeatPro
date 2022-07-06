@@ -59,7 +59,7 @@ sce_refurbishment   = None
 sce_Tamb		    = None
 #
 processes			= 11
-chunk_size			= 19
+chunk_size			= 2512
 ###
 SIMULATION			= [[region], 
 					   [N, resolution, timesteps, number_of_typ_days],
