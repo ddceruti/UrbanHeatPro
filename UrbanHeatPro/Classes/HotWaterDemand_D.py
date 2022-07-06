@@ -24,7 +24,7 @@ class HotWaterDemand_D():
 
 		# Simulation time frame
 		self.resolution  	   = resolution				  # resolution in min
-		self.day_vector		   = day_vector				  # Vector with day of year in simulaiton time frame
+		self.day_vector		   = day_vector				  # Vector with day of year in simulation time frame
 			
 		# Results
 		self.dhw_m3	 	 	   = 0.					  	  # Instantaneous DHW demand in m3

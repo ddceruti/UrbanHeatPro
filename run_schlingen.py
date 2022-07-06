@@ -58,8 +58,8 @@ number_of_typ_days  = 365
 sce_refurbishment   = None
 sce_Tamb		    = None
 #
-processes			= 12
-chunk_size			= 2439
+processes			= 11
+chunk_size			= 19
 ###
 SIMULATION			= [[region], 
 					   [N, resolution, timesteps, number_of_typ_days],
@@ -96,7 +96,7 @@ _space_heating 		= True
 _hot_water			= True
 _energy_only		= False
 #
-base_load			= 5. * 1e6
+base_load			= 0. * 1e6
 ###
 CITY				= [[filename_buildings, filename_syn_city], [connection_factor],
 					   [_space_heating, _hot_water, _energy_only], [base_load]]
