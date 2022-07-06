@@ -21,9 +21,9 @@ class HotWaterDemand():
 		self.daily_DHW		   = daily_DHW				  # Mean daily hot water consumption [m3]
 		
 		# Hot water tank
-		self.hw_tank_capacity  = hw_tank_capacity		  # Hot water tank capacity in m3
+		self.hw_tank_capacity  = 0.000001		  # Hot water tank capacity in m3
 		self.hw_tank_limit	   = hw_tank_limit * self.hw_tank_capacity # Hot water tank limit in m3
-		self.hw_tank_volume_t0 = hw_tank_volume_t0		  # Initial state of hot water tank in m3
+		self.hw_tank_volume_t0 = 0.000001		  # Initial state of hot water tank in m3
 		self.hw_tank_volume	   = self.hw_tank_volume_t0	  # State of hot water tank in m3
 		self.hw_flow		   = hw_flow				  # Flow to refill hot water tank in L/min
 		
