@@ -1054,7 +1054,7 @@ class City():
 				'sh_demand_per_h_area;solar_gains_per_h_area;int_gains_per_h_area;' + \
 				'hw_demand;hw_demand_m3;' + \
 				'total_demand;total_demand_per_h_area' + \
-				'peak_demand_building_W;peak_demand_city_W\n')
+				'peak_demand_building_W;peak_demand_W\n')
 							
 		f.close()		
 #

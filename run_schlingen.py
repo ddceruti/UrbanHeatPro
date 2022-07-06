@@ -87,8 +87,8 @@ SIMULATION			= [[region],
 #filename_buildings  = None
 filename_buildings  = 'buildings_Schlingen.csv'
 #
-filename_syn_city	= None
-#filename_syn_city	= 'SynCity_Unterhaching_0.csv'
+# filename_syn_city	= None
+filename_syn_city	= 'SynCity_Schlingen_0_0.csv'
 #
 connection_factor	= 1.
 #

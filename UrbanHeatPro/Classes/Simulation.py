@@ -127,7 +127,7 @@ class Simulation():
 			self.read_raw_building_data()
 		### Synthetic city	
 		if self.syncity_filename is not None:
-			input_dir 		= self.my_dir + '/input/SynCity/'
+			input_dir 		= self.my_dir + '\\input\\SynCity\\'
 			filename 	  	= input_dir + self.syncity_filename
 			self.buildings  = self.read_syn_city(filename)
 		
